@@ -25,6 +25,33 @@ public class OperacionesEstudiantes {
         estudiantes = lista;
     }
     
+    public void establecerEdadMinima(){
+        edadminima = 100;
+        for (int i = 0; i < estudiantes.size(); i++) {
+            if (estudiantes.get(i).obtenerEdad() < edadminima){
+                edadminima = estudiantes.get(i).obtenerEdad();
+            }
+        }
+    }
+    
+     public void establecerEdadMaxima(){
+        edadmaxima = 0;
+        for (int i = 0; i < estudiantes.size(); i++) {
+            if (estudiantes.get(i).obtenerEdad() > edadmaxima){
+                edadmaxima = estudiantes.get(i).obtenerEdad();
+            }
+        }
+    }
+     
+    public void establecerListaCiudades(){
+        String cadena = "";
+        for (int i = 0; i < estudiantes.size(); i++) {
+            cadena = String.format("%s%s\n", cadena,
+                     estudiantes.get(i).obtenerCiudad().obtenerNombre());
+        }
+        listaCiudadesEstudiantes = cadena;
+    }
+    
     public ArrayList<Persona> obtenerEstudiante(){
         return estudiantes;
     }
@@ -42,5 +69,43 @@ public class OperacionesEstudiantes {
         return promedioEdades;
     }
     
+    public int obtenerEdadMinima(){
+        
+        return edadminima;
+    }
+    
+    public int obtenerEdadMaxima(){
+        
+        return edadmaxima;
+    }
+    
+    public String obtenerListaCiudades(){
+        
+        return listaCiudadesEstudiantes;
+    }
+    
+    @Override
+    public String toString(){
+        String cadena = String.format("LISTA ESTUDIANTES\n");
+        
+        for (int i = 0; i < estudiantes.size(); i++) {
+            cadena = String.format("%s"
+                    + "Nombre: %s  Edad: %d  Ciudad: %s\n",
+                    cadena,
+                    obtenerEstudiante().get(i).obtenerNombre(),
+                    obtenerEstudiante().get(i).obtenerEdad(),
+                    obtenerEstudiante().get(i).obtenerCiudad().obtenerNombre());
+        }
+                
+        cadena = String.format("%sPromedio Edades: %.2f\n"
+                + "Edad Minima: %d\n"
+                + "Edad Maxima: %d\n",
+                cadena,
+                obtenerPromedioEdades(),
+                obtenerEdadMinima(),
+                obtenerEdadMaxima());
+        
+        return cadena;
+    }
     
 }
